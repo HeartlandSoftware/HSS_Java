@@ -1,4 +1,4 @@
-<a href="https://github.com/HeartlandSoftware/HSS_Java/LICENSE">
+<a href="https://github.com/HeartlandSoftware/HSS_Java/blob/master/LICENSE">
 
 <img align="right" src="https://img.shields.io/badge/license-Apache 2-blue.svg"/>
 
