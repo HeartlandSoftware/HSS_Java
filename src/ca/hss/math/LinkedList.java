@@ -98,7 +98,7 @@ public class LinkedList<Item extends LinkedListNode> implements Iterable<Item> {
     public Item newObject() {
 		Item node = null;
 		try {
-			node = clazz.newInstance();
+			node = clazz.getDeclaredConstructor().newInstance();
 		}
 		catch (Exception ex) { }
 		return node;
