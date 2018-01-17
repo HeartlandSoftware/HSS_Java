@@ -10,8 +10,8 @@
 		<mkdir dir="${build}"/>
 	</target>
 	
-	<target name="compile" depends="init" description="Compile the source">
-		<javac includeantruntime="false" debug="false" srcdir="${src}" destdir="${build}" target="1.7" />
+	<target name="compile" depends="clean,init" description="Compile the source">
+		<javac includeantruntime="false" debug="false" srcdir="${src}" destdir="${build}" includes="**/*.java" excludes="**/*Test.java" target="1.8" />
 	</target>
 	
 	<target name="dist" depends="compile" description="Generate the jar file">
@@ -22,7 +22,7 @@
 	</target>
 	
 	<target name="clean" description="Clean the output directories">
-		<delete dir="${build}" />
-		<delete file="${dist}/HSS_Java.jar" />
+		<delete failonerror="false" dir="${build}" />
+		<delete failonerror="false" file="${dist}/HSS_Java.jar" />
 	</target>
 </project>
