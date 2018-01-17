@@ -1,7 +1,7 @@
 /**
  * WebDownloader.java
  *
- * Copyright 2016 Heartland Software Solutions Inc.
+ * Copyright 2018 Heartland Software Solutions Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -175,24 +175,30 @@ public class WebDownloader {
 		}
 		else filename = filename + file;
 
-		InputStream is;
+		HttpURLConnection connection;
 		if (m_connectionType == ConnectionType.PROXY) {
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(m_proxyAddress, m_proxyPort));
-			HttpURLConnection connection = (HttpURLConnection)address.openConnection(proxy);
-			connection.setDoOutput(true);
-			connection.setDoInput(true);
-			connection.setRequestMethod("POST");
-			is = connection.getInputStream();
+			connection = (HttpURLConnection)address.openConnection(proxy);
 		}
 		else
-			is = address.openStream();
-		ReadableByteChannel rbc = Channels.newChannel(is);
-		File fl = new File(filename);
-		fl.deleteOnExit();
-		FileOutputStream fos = new FileOutputStream(fl);
-		fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-		fos.close();
-		is.close();
+			connection = (HttpURLConnection)address.openConnection();
+		connection.setRequestMethod("GET");
+		connection.connect();
+		int code = connection.getResponseCode();
+		if (code != 200) {
+			System.out.println("Code: " + code);
+			System.out.println("URL: " + address.toString());
+		}
+		else {
+			InputStream is = connection.getInputStream();
+			ReadableByteChannel rbc = Channels.newChannel(is);
+			File fl = new File(filename);
+			fl.deleteOnExit();
+			FileOutputStream fos = new FileOutputStream(fl);
+			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			fos.close();
+			is.close();
+		}
 		return filename;
 	}
 
