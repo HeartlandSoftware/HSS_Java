@@ -42,4 +42,9 @@ public abstract class ERROR {
 	 * There were missing hours in the imported data that were filled using interpolation.
 	 */
 	public static final long INTERPOLATE = 12803;
+	
+	/**
+	 * Combined error, interpolated and invalid data.
+	 */
+	public static final long INTERPOLATE_BEFORE_INVALID_DATA = 12805;
 }
