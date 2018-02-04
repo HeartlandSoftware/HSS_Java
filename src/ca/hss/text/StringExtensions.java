@@ -39,6 +39,7 @@ public abstract class StringExtensions {
 	 * @param str
 	 * @return
 	 */
+	@Deprecated
 	public static String capitalizeFully(String str) {
 		return capitalizeFully(str, null);
 	}
@@ -51,6 +52,7 @@ public abstract class StringExtensions {
 	 * @param delimiters
 	 * @return
 	 */
+	@Deprecated
 	public static String capitalizeFully(String str, final char... delimiters) {
 		final int delimLen = delimiters == null ? -1 : delimiters.length;
 		if (str == null || str.isEmpty() || delimLen == 0)
@@ -60,13 +62,21 @@ public abstract class StringExtensions {
 	}
 
 	/**
-	 * Capitalize an entire string.
-	 * 
-	 * @param str
-	 * @return
+	 * Capitalize each word in a string.
+	 * @param input The string to capitalize the words in.
+	 * @return The same string as input but with each word capitalized.
 	 */
-	public static String capitalize(final String str) {
-		return capitalize(str, null);
+	public static String capitalizeFully(final String input) {
+		String[] lower = input.toLowerCase().split(" ");
+		StringBuilder result = new StringBuilder();
+		
+		for(int i = 0; i < lower.length; i++) {
+			result.append(Character.toUpperCase(lower[i].charAt(0)));
+			result.append(lower[i].substring(1, lower[i].length()));
+			result.append(" ");
+		}
+		
+		return result.toString().trim();
 	}
 
 	/**
@@ -76,6 +86,7 @@ public abstract class StringExtensions {
 	 * @param delimiters
 	 * @return
 	 */
+	@Deprecated
 	public static String capitalize(final String str, final char... delimiters) {
 		final int delimLen = delimiters == null ? -1 : delimiters.length;
 		if (str == null || str.isEmpty() || delimLen == 0)
@@ -94,6 +105,7 @@ public abstract class StringExtensions {
 		return new String(buffer);
 	}
 
+	@Deprecated
 	private static boolean isDelimiter(final char ch, final char[] delimiters) {
 		if (delimiters == null) {
 			return Character.isWhitespace(ch);
@@ -122,11 +134,12 @@ public abstract class StringExtensions {
 		}
 		else if (context.value != null) {
 			if (context.value.hasMoreElements())
-				return context.value.nextToken();
+				return context.value.nextToken(strDelimit);
 		}
 		return null;
 	}
 
+	@Deprecated
 	public static String strcpy_strip_s(String _Src, String _Strip) {
 		String _Dst = _Src;
 		for (int i = 0; i < _Strip.length(); i++) {
@@ -411,10 +424,12 @@ public abstract class StringExtensions {
 		return varindex;
 	}
 	
+	@Deprecated
 	public static int strstr(String val1, String val2) {
 		return val1.indexOf(val2);
 	}
 	
+	@Deprecated
 	public static long strtol(String val, OutVariable<Integer> lastPos, int base) {
 		if (val.length() < 1 || base < Character.MIN_RADIX || base > Character.MAX_RADIX) {
 			if (lastPos != null)
