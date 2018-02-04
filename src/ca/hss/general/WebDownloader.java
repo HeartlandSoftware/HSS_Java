@@ -182,9 +182,23 @@ public class WebDownloader {
 		}
 		else
 			connection = (HttpURLConnection)address.openConnection();
+		connection.setInstanceFollowRedirects(true);
 		connection.setRequestMethod("GET");
 		connection.connect();
 		int code = connection.getResponseCode();
+		if (code != HttpURLConnection.HTTP_OK) {
+			if (code == HttpURLConnection.HTTP_MOVED_TEMP ||
+					code == HttpURLConnection.HTTP_MOVED_PERM ||
+					code == HttpURLConnection.HTTP_SEE_OTHER) {
+				String newUrl = connection.getHeaderField("Location");
+				System.out.println("Redirect: " + newUrl);
+				String cookies = connection.getHeaderField("Set-Cookie");
+				connection = (HttpURLConnection)new URL(newUrl).openConnection();
+				connection.setRequestProperty("Cookie", cookies);
+				code = connection.getResponseCode();
+			}
+		}
+		
 		if (code != 200) {
 			System.out.println("Code: " + code);
 			System.out.println("URL: " + address.toString());
