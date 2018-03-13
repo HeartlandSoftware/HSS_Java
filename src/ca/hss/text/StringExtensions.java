@@ -31,36 +31,6 @@ import ca.hss.general.OutVariable;
  * @author Travis
  */
 public abstract class StringExtensions {
-	
-	/**
-	 * Capitalize an entire string. Converts all characters to lower
-	 * case before doing the capitalization.
-	 * 
-	 * @param str
-	 * @return
-	 */
-	@Deprecated
-	public static String capitalizeFully(String str) {
-		return capitalizeFully(str, null);
-	}
-	
-	/**
-	 * Capitalize all characters after a given delimiter. Converts all characters to lower
-	 * case before doing the capitalization.
-	 * 
-	 * @param str
-	 * @param delimiters
-	 * @return
-	 */
-	@Deprecated
-	public static String capitalizeFully(String str, final char... delimiters) {
-		final int delimLen = delimiters == null ? -1 : delimiters.length;
-		if (str == null || str.isEmpty() || delimLen == 0)
-			return str;
-		str = str.toLowerCase();
-		return capitalize(str, delimiters);
-	}
-
 	/**
 	 * Capitalize each word in a string.
 	 * @param input The string to capitalize the words in.
@@ -77,45 +47,6 @@ public abstract class StringExtensions {
 		}
 		
 		return result.toString().trim();
-	}
-
-	/**
-	 * Capitalize all characters after a given delimiter.
-	 * 
-	 * @param str
-	 * @param delimiters
-	 * @return
-	 */
-	@Deprecated
-	public static String capitalize(final String str, final char... delimiters) {
-		final int delimLen = delimiters == null ? -1 : delimiters.length;
-		if (str == null || str.isEmpty() || delimLen == 0)
-			return str;
-		final char[] buffer = str.toCharArray();
-		boolean capitalizeNext = true;
-		for (int i = 0; i < buffer.length; i++) {
-			final char ch = buffer[i];
-			if (isDelimiter(ch, delimiters)) {
-				capitalizeNext = true;
-			} else if (capitalizeNext) {
-				buffer[i] = Character.toTitleCase(ch);
-				capitalizeNext = false;
-			}
-		}
-		return new String(buffer);
-	}
-
-	@Deprecated
-	private static boolean isDelimiter(final char ch, final char[] delimiters) {
-		if (delimiters == null) {
-			return Character.isWhitespace(ch);
-		}
-		for (final char delimiter : delimiters) {
-			if (ch == delimiter) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	/**
@@ -137,15 +68,6 @@ public abstract class StringExtensions {
 				return context.value.nextToken(strDelimit);
 		}
 		return null;
-	}
-
-	@Deprecated
-	public static String strcpy_strip_s(String _Src, String _Strip) {
-		String _Dst = _Src;
-		for (int i = 0; i < _Strip.length(); i++) {
-			_Dst = _Dst.replace(String.valueOf(_Strip.charAt(i)), "");
-		}
-		return _Dst;
 	}
 
 	public static int _stscanf_s(String str, String pattern, List<OutVariable<Object>> vars) {
@@ -422,51 +344,5 @@ public abstract class StringExtensions {
 				break;
 		}
 		return varindex;
-	}
-	
-	@Deprecated
-	public static int strstr(String val1, String val2) {
-		return val1.indexOf(val2);
-	}
-	
-	@Deprecated
-	public static long strtol(String val, OutVariable<Integer> lastPos, int base) {
-		if (val.length() < 1 || base < Character.MIN_RADIX || base > Character.MAX_RADIX) {
-			if (lastPos != null)
-				lastPos.value = null;
-			return 0;
-		}
-		char[] array = val.toLowerCase().toCharArray();
-		int start = 0;
-		while (start < array.length && (array[start] == ' ' || array[start] == '\t')) start++;
-		if (start == array.length) {
-			if (lastPos != null)
-				lastPos.value = null;
-			return 0;
-		}
-		boolean positive = array[start] != '-';
-		if (array[start] == '-' || array[start] == '+')
-			start++;
-		int end = start;
-		for (; end < array.length; end++) {
-			try {
-				Integer.parseInt(Character.toString(array[end]), base);
-			}
-			catch (NumberFormatException ex) {
-				break;
-			}
-		}
-		int length = end - start;
-		if (length < 1) {
-			if (lastPos != null)
-				lastPos.value = null;
-			return 0;
-		}
-		if (lastPos != null)
-			lastPos.value = end;
-		long result = Long.parseLong(new String(array, start, length), base);
-		if (!positive)
-			return -result;
-		return result;
 	}
 }
