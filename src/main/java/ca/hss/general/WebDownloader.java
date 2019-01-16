@@ -192,9 +192,9 @@ public class WebDownloader {
 					code == HttpURLConnection.HTTP_SEE_OTHER) {
 				String newUrl = connection.getHeaderField("Location");
 				System.out.println("Redirect: " + newUrl);
-				String cookies = connection.getHeaderField("Set-Cookie");
 				connection = (HttpURLConnection)new URL(newUrl).openConnection();
-				connection.setRequestProperty("Cookie", cookies);
+				connection.setInstanceFollowRedirects(true);
+				connection.setRequestMethod("GET");
 				code = connection.getResponseCode();
 			}
 		}
