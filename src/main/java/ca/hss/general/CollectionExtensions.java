@@ -34,7 +34,7 @@ public abstract class CollectionExtensions {
 	 * @param compare
 	 * @return
 	 */
-	public static <T> T Find(T[] array, Selector<T> compare) {
+	public static <T> T find(T[] array, Selector<T> compare) {
 		for (T val : array) {
 			if (compare.testEqual(val))
 				return val;
