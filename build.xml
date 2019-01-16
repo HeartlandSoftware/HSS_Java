@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="HSS_Java" default="dist" basedir=".">
-	<property name="src" location="src" />
+	<property name="src" location="src/main/java" />
 	<property name="build" location="bin" />
 	<property name="dist" location="." />
 	<property name="projname" value="HSS_Java"/>
@@ -11,7 +11,7 @@
 	</target>
 	
 	<target name="compile" depends="clean,init" description="Compile the source">
-		<javac includeantruntime="false" debug="false" srcdir="${src}" destdir="${build}" includes="**/*.java" excludes="**/*Test.java" target="1.8" />
+		<javac includeantruntime="false" debug="false" srcdir="${src}" destdir="${build}" includes="**/*.java" target="1.8" />
 	</target>
 	
 	<target name="dist" depends="compile" description="Generate the jar file">
