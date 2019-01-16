@@ -24,7 +24,7 @@ import ca.hss.annotations.Source;
  * General math routines like angle conversions.
  */
 @Source(project="Math", sourceFile="angles.h")
-public class general {
+public class General {
 	public static final double HALF_PI = 1.57079632679489661923;
 	public static final double PI = Math.PI;
 	public static final double TWO_PI = 2.0 * Math.PI;

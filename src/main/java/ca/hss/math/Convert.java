@@ -20,7 +20,7 @@ package ca.hss.math;
 
 import ca.hss.annotations.Source;
 
-import static ca.hss.math.general.*;
+import static ca.hss.math.General.*;
 
 /**
  * Methods for converting units.
@@ -39,13 +39,13 @@ public class Convert {
 	protected final static double intensity_translation[] = { 3.461, 1.0 };
 	protected final static double consumption_translation[] = { 0.2242, 1.0 };
 
-	public static double ConvertUnit(double value, long to_format, long from_format) {
+	public static double convertUnit(double value, long to_format, long from_format) {
 		if (from_format == to_format)
 			return value;
 		
 		if (((from_format & 0xffffffff00000000L) != 0) || ((to_format & 0xffffffff00000000L) != 0)) {
-			double val = ConvertUnit(value, (to_format >> 0x20) & 0x00000000ffffffffL, (from_format >> 0x20) & 0x00000000ffffffffL);
-			val = ConvertUnit(val, from_format & 0x00000000ffffffffL, to_format & 0x00000000ffffffffL);
+			double val = convertUnit(value, (to_format >> 0x20) & 0x00000000ffffffffL, (from_format >> 0x20) & 0x00000000ffffffffL);
+			val = convertUnit(val, from_format & 0x00000000ffffffffL, to_format & 0x00000000ffffffffL);
 			return val;
 		}
 		
@@ -349,74 +349,74 @@ public class Convert {
 		public static final int METRIC = 0x00000001;
 		public static final int IMPERIAL = 0x00000002;
 		
-		public static long Temperature(int system) {
+		public static long temperature(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.FAHRENHEIT;
 			return STORAGE_FORMAT.CELSIUS;
 		}
 		
-		public static long Speed(int system) {
+		public static long speed(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.MILE | STORAGE_FORMAT.TIME_DIV | STORAGE_FORMAT.HOUR;
 			return STORAGE_FORMAT.KM | STORAGE_FORMAT.TIME_DIV | STORAGE_FORMAT.HOUR;
 		}
 		
-		public static long FuelConsumpiton(int system) {
+		public static long fuelConsumpiton(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.TONS_PER_ACRE;
 			return STORAGE_FORMAT.KG_PER_M2;
 		}
 		
-		public static long Intensity(int system) {
+		public static long intensity(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.BTU_FT_S;
 			return STORAGE_FORMAT.KILOWATT_PER_M;
 		}
 		
-		public static long SpreadRate(int system) {
+		public static long spreadRate(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.CHAIN | STORAGE_FORMAT.TIME_DIV | STORAGE_FORMAT.HOUR;
 			return STORAGE_FORMAT.M | STORAGE_FORMAT.TIME_DIV | STORAGE_FORMAT.MINUTE;
 		}
 		
-		public static long Area(int system) {
+		public static long area(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.ACRE;
 			return STORAGE_FORMAT.HECTARE;
 		}
 		
-		public static long DistanceSmall(int system) {
+		public static long distanceSmall(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.INCH;
 			return STORAGE_FORMAT.MM;
 		}
 		
-		public static long DistanceSmall2(int system) {
+		public static long distanceSmall2(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.INCH;
 			return STORAGE_FORMAT.CM;
 		}
 		
-		public static long DistanceMedium(int system) {
+		public static long distanceMedium(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.FOOT;
 			return STORAGE_FORMAT.M;
 		}
 		
-		public static long DistanceMedium2(int system) {
+		public static long distanceMedium2(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.CHAIN;
 			return STORAGE_FORMAT.M;
 		}
 		
-		public static long DistanceLarge(int system) {
+		public static long distanceLarge(int system) {
 			if (system == IMPERIAL)
 				return STORAGE_FORMAT.MILE;
 			return STORAGE_FORMAT.KM;
 		}
 	}
 	
-	private abstract class STORAGE {
+	private static abstract class STORAGE {
 		public static final long TIME_START = 0x00010000;
 		public static final long TIME_END = 0x001f0000;
 		public static final long DISTANCE_START = 0x00000001;

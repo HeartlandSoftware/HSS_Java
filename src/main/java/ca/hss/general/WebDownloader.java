@@ -54,12 +54,12 @@ public class WebDownloader {
 		return m_connectionType;
 	}
 
-	public static String ProxyAddress() {
+	public static String proxyAddress() {
 		hasInternetConnection();
 		return m_proxyAddress;
 	}
 
-	public static int ProxyPort() {
+	public static int proxyPort() {
 		hasInternetConnection();
 		return m_proxyPort;
 	}
@@ -151,7 +151,7 @@ public class WebDownloader {
 	 * @return The path to the downloaded file. This file will be deleted when the virtual machine terminates.
 	 * @throws IOException
 	 */
-	public static String Download(URL address) throws IOException {
+	public static String download(URL address) throws IOException {
 		if (!hasInternetConnection())
 			throw new IOException("No internet connection.");
 		String tempDir = System.getProperty("java.io.tmpdir");
