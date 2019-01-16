@@ -23,6 +23,7 @@ package ca.hss.general;
  */
 public abstract class ERROR {
 	public static final long S_OK = 0;
+	public static final long S_FALSE = 1;
 	public static final long FILE_NOT_FOUND = 2;
 	public static final long INVALID_DATA = 13;
 	public static final long READ_FAULT = 30;
