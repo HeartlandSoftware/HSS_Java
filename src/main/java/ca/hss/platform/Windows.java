@@ -36,7 +36,7 @@ public class Windows extends OperatingSystem {
 
 		//Java 9+
 		try {
-			Method method = process.getClass().getMethod("pid");
+			Method method = Process.class.getMethod("pid");
 			if (method != null) {
 				Object o = method.invoke(process);
 				if (o instanceof Number)
