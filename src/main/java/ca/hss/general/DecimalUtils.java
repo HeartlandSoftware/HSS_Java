@@ -1,6 +1,6 @@
 /***********************************************************************
  * REDapp - DecimalUtils.java
- * Copyright (C) 2015-2019 The REDapp Development Team
+ * Copyright (C) 2015-2021 The REDapp Development Team
  * Homepage: http://redapp.org
  * 
  * REDapp is free software: you can redistribute it and/or modify
