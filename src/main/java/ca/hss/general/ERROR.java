@@ -48,4 +48,8 @@ public abstract class ERROR {
 	 * Combined error, interpolated and invalid data.
 	 */
 	public static final long INTERPOLATE_BEFORE_INVALID_DATA = 12805;
+	/**
+	 * Attempted to load a weather stream that starts after noon LST.
+	 */
+	public static final long START_AFTER_NOON = 12807;
 }
