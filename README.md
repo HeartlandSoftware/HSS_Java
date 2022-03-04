@@ -1,5 +1,6 @@
 <a href="https://github.com/HeartlandSoftware/HSS_Java/blob/master/LICENSE">
 
+![example workflow](https://github.com/HeartlandSoftware/HSS_Java/actions/workflows/maven-publish.yml/badge.svg)
 <img align="right" src="https://img.shields.io/badge/license-Apache 2-blue.svg"/>
 
 </a>
