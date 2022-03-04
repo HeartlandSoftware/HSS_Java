@@ -1,9 +1,6 @@
-<a href="https://github.com/HeartlandSoftware/HSS_Java/blob/master/LICENSE">
-
-![example workflow](https://github.com/HeartlandSoftware/HSS_Java/actions/workflows/maven-publish.yml/badge.svg)
-<img align="right" src="https://img.shields.io/badge/license-Apache 2-blue.svg"/>
-
-</a>
+![Latest Version](https://img.shields.io/github/v/release/HeartlandSoftware/HSS_Java)
+![Maven Package](https://github.com/HeartlandSoftware/HSS_Java/actions/workflows/maven-publish.yml/badge.svg)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/HeartlandSoftware/HSS_Java/blob/master/LICENSE)
 
 # HSS_Java
 
