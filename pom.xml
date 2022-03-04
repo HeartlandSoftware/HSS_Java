@@ -4,7 +4,7 @@
   <groupId>ca.hss</groupId>
   <artifactId>hss-java</artifactId>
   <packaging>jar</packaging>
-  <version>1.2.0.1</version>
+  <version>1.2.0-0</version>
   <name>hss-java</name>
   <url>http://heartlandsoftware.ca/</url>
   <properties>
@@ -38,19 +38,6 @@
           <target>1.8</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>parse-version</id>
-            <goals>
-              <goal>parse-version</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
   <profiles>
@@ -63,6 +50,20 @@
       </activation>
       <build>
         <plugins>
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>build-helper-maven-plugin</artifactId>
+	        <version>3.2.0</version>
+	        <executions>
+	          <execution>
+	            <id>parse-version</id>
+	            <goals>
+	              <goal>parse-version</goal>
+	            </goals>
+                <phase>validate</phase>
+	          </execution>
+	        </executions>
+	      </plugin>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>versions-maven-plugin</artifactId>
@@ -74,28 +75,7 @@
                 </goals>
                 <phase>validate</phase>
                 <configuration>
-                  <newVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${parsedVersion.nextBuildNumber}</newVersion>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>properties-maven-plugin</artifactId>
-            <version>1.0.0</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>set-system-properties</goal>
-                </goals>
-                <phase>validate</phase>
-                <configuration>
-                  <properties>
-                    <property>
-                      <name>application.version</name>
-                      <value>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${parsedVersion.nextBuildNumber}</value>
-                    </property>
-                  </properties>
+                  <newVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-${parsedVersion.nextBuildNumber}</newVersion>
                 </configuration>
               </execution>
             </executions>
