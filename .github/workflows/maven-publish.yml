@@ -26,6 +26,7 @@ jobs:
         server-id: github
     
     - name: Increment the version number
+      id: incVer
       run: |
         mvn validate -DincrementBuild
         mvn versions:commit
@@ -35,7 +36,7 @@ jobs:
         git add pom.xml
         git commit -m "[skip ci]"
         git tag -a v$APPLICATION_VERSION -m "Release v$APPLICATION_VERSION"
-        echo ::set-output name=application_version::v$APPLICATION_VERSION
+        echo "::set-output name=application_version::v$APPLICATION_VERSION"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
@@ -49,9 +50,9 @@ jobs:
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        name: ${{ steps.vars.outputs.application_version }}
+        name: ${{ steps.incVer.outputs.application_version }}
         files: target/*.jar
-        tag_name: refs/tags/${{ steps.vars.outputs.application_version }}
+        tag_name: refs/tags/${{ steps.incVer.outputs.application_version }}
         
     - name: Publish package
       run: mvn --batch-mode deploy
