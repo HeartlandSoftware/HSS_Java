@@ -27,7 +27,8 @@ jobs:
     
     - name: Increment the version number
       run: |
-        mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${parsedVersion.nextBuildNumber} versions:commit
+        mvn validate -DincrementBuild
+        mvn versions:commit
         APPLICATION_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         git config user.name github-actions
         git config user.email github-actions@github.com
