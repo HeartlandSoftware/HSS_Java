@@ -51,6 +51,7 @@ jobs:
       with:
         name: ${{ steps.vars.outputs.application_version }}
         files: target/*.jar
+        tag_name: refs/tags/${{ steps.vars.outputs.application_version }}
         
     - name: Publish package
       run: mvn --batch-mode deploy
